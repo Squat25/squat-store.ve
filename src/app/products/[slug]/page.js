@@ -1,6 +1,7 @@
 import { request } from "@/lib/datocms";
 import Image from "next/image";
 import { notFound } from "next/navigation"; // Para manejar productos no encontrados
+import Link from "next/link";
 
 // Query para obtener todos los slugs de productos para generateStaticParams
 const ALL_PRODUCTS_SLUGS_QUERY = `
@@ -106,12 +107,12 @@ export default async function ProductPage({ params }) {
         </div>
       </div>
 
-      <a
+      <Link
         href="/"
         className="mt-12 text-blue-600 hover:underline text-lg font-semibold"
       >
         &larr; Volver a todos los productos
-      </a>
+      </Link>
     </main>
   );
 }
