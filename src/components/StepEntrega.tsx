@@ -12,8 +12,8 @@ interface StepEntregaProps {
   onNext: () => void;
 }
 
-type MetodoEntrega = "domicilio" | "agencia";
-type EmpresaAgencia = "MRW" | "Zoom";
+// type MetodoEntrega = "domicilio" | "agencia";
+// type EmpresaAgencia = "MRW" | "Zoom";
 
 const estados = [
   "Amazonas",
