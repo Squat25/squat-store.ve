@@ -1,0 +1,58 @@
+{
+    "Distrito Capital": [
+        {
+            "nombre": "MRW Caracas Centro",
+            "ciudad": "Caracas"
+        },
+        {
+            "nombre": "MRW Chacao",
+            "ciudad": "Caracas"
+        },
+        {
+            "nombre": "MRW La Candelaria",
+            "ciudad": "Caracas"
+        }
+    ],
+    "Lara": [
+        {
+            "nombre": "MRW Barquisimeto Centro",
+            "ciudad": "Barquisimeto"
+        },
+        {
+            "nombre": "MRW Este",
+            "ciudad": "Barquisimeto"
+        },
+        {
+            "nombre": "MRW Cabudare",
+            "ciudad": "Cabudare"
+        }
+    ],
+    "Zulia": [
+        {
+            "nombre": "MRW Maracaibo Centro",
+            "ciudad": "Maracaibo"
+        },
+        {
+            "nombre": "MRW La Limpia",
+            "ciudad": "Maracaibo"
+        },
+        {
+            "nombre": "MRW Ciudad Ojeda",
+            "ciudad": "Ciudad Ojeda"
+        }
+    ],
+    "Carabobo": [
+        {
+            "nombre": "MRW Valencia Centro",
+            "ciudad": "Valencia"
+        },
+        {
+            "nombre": "MRW Naguanagua",
+            "ciudad": "Naguanagua"
+        },
+        {
+            "nombre": "MRW Puerto Cabello",
+            "ciudad": "Puerto Cabello"
+        }
+    ]
+}

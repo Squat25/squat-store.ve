@@ -1,0 +1,824 @@
+{
+  "Distrito Capital": [
+    {
+      "nombre": "AGENCIA 01010 LOS CAOBOS",
+      "ciudad": "CARACAS"
+    },
+    {
+      "nombre": "AGENCIA 01020 BELLO MONTE",
+      "ciudad": "BELLO MONTE"
+    },
+    {
+      "nombre": "AGENCIA 01030 EL LLANITO",
+      "ciudad": "EL LLANITO"
+    },
+    {
+      "nombre": "AGENCIA 01031 PLAZA LAS AMERICAS",
+      "ciudad": "EL CAFETAL"
+    },
+    {
+      "nombre": "AGENCIA 01040 LA CALIFORNIA NORTE",
+      "ciudad": "LA CALIFORNIA NORTE"
+    },
+    {
+      "nombre": "AGENCIA 01041 EL HATILLO",
+      "ciudad": "LA HACIENDA"
+    },
+    {
+      "nombre": "AGENCIA 01050 CHUAO",
+      "ciudad": "CHUAO"
+    },
+    {
+      "nombre": "AGENCIA 01060 SABANA GRANDE",
+      "ciudad": "SABANA GRANDE"
+    },
+    {
+      "nombre": "AGENCIA 01070 LA CANDELARIA",
+      "ciudad": "LA CANDELARIA"
+    },
+    {
+      "nombre": "AGENCIA 01080 ALTAMIRA",
+      "ciudad": "ALTAMIRA"
+    },
+    {
+      "nombre": "AGENCIA 01090 SANTA MONICA",
+      "ciudad": "SANTA MONICA"
+    },
+    {
+      "nombre": "AGENCIA 01100 CENTRO MERCADO",
+      "ciudad": "EL LLANITO"
+    },
+    {
+      "nombre": "AGENCIA 01110 CIUDAD COMUNAL CATIA",
+      "ciudad": "CATIA"
+    },
+    {
+      "nombre": "AGENCIA 01120 EL PARAISO",
+      "ciudad": "EL PARAISO"
+    },
+    {
+      "nombre": "AGENCIA 01130 LA URBINA",
+      "ciudad": "LA URBINA"
+    },
+    {
+      "nombre": "AGENCIA 01140 CARICUAO",
+      "ciudad": "CARICUAO"
+    },
+    {
+      "nombre": "AGENCIA 01150 SANTA ROSALIA",
+      "ciudad": "SANTA ROSALIA"
+    },
+    {
+      "nombre": "AGENCIA 01160 PROPATRIA",
+      "ciudad": "PROPATRIA"
+    },
+    {
+      "nombre": "AGENCIA 01170 SAN MARTIN",
+      "ciudad": "SAN MARTIN"
+    },
+    {
+      "nombre": "AGENCIA 01180 LA VEGA",
+      "ciudad": "LA VEGA"
+    },
+    {
+      "nombre": "AGENCIA 01190 MACARAO",
+      "ciudad": "MACARAO"
+    }
+  ],
+  "Miranda": [
+    {
+      "nombre": "AGENCIA 11010 LOS TEQUES",
+      "ciudad": "LOS TEQUES"
+    },
+    {
+      "nombre": "AGENCIA 11020 SAN ANTONIO DE LOS ALTOS",
+      "ciudad": "SAN ANTONIO DE LOS ALTOS"
+    },
+    {
+      "nombre": "AGENCIA 11030 CARRIZAL",
+      "ciudad": "CARRIZAL"
+    },
+    {
+      "nombre": "AGENCIA 11040 LOS CASTORES",
+      "ciudad": "SAN ANTONIO DE LOS ALTOS"
+    },
+    {
+      "nombre": "AGENCIA 11050 SANTA TERESA DEL TUY",
+      "ciudad": "SANTA TERESA DEL TUY"
+    },
+    {
+      "nombre": "AGENCIA 11060 OCUMARE DEL TUY",
+      "ciudad": "OCUMARE DEL TUY"
+    },
+    {
+      "nombre": "AGENCIA 11070 CHARALLAVE",
+      "ciudad": "CHARALLAVE"
+    },
+    {
+      "nombre": "AGENCIA 11080 CUA",
+      "ciudad": "CUA"
+    },
+    {
+      "nombre": "AGENCIA 11090 SAN FRANCISCO DE YARE",
+      "ciudad": "SAN FRANCISCO DE YARE"
+    },
+    {
+      "nombre": "AGENCIA 11100 RIO CHICO",
+      "ciudad": "RIO CHICO"
+    },
+    {
+      "nombre": "AGENCIA 11110 HIGUEROTE",
+      "ciudad": "HIGUEROTE"
+    },
+    {
+      "nombre": "AGENCIA 11120 BARLOVENTO",
+      "ciudad": "BARLOVENTO"
+    },
+    {
+      "nombre": "AGENCIA 11130 CAUCAGUA",
+      "ciudad": "CAUCAGUA"
+    },
+    {
+      "nombre": "AGENCIA 11140 ARAIRA",
+      "ciudad": "ARAIRA"
+    },
+    {
+      "nombre": "AGENCIA 11150 GUARENAS",
+      "ciudad": "GUARENAS"
+    },
+    {
+      "nombre": "AGENCIA 11160 GUATIRE",
+      "ciudad": "GUATIRE"
+    },
+    {
+      "nombre": "AGENCIA 11170 SANTA LUCIA",
+      "ciudad": "SANTA LUCIA"
+    },
+    {
+      "nombre": "AGENCIA 11180 CUMBRES DE CURUMO",
+      "ciudad": "CUMBRES DE CURUMO"
+    },
+    {
+      "nombre": "AGENCIA 11190 SANTA FE",
+      "ciudad": "SANTA FE"
+    }
+  ],
+  "Aragua": [
+    {
+      "nombre": "AGENCIA 12010 MARACAY CENTRO",
+      "ciudad": "MARACAY"
+    },
+    {
+      "nombre": "AGENCIA 12020 CC PARQUE LOS AVIADORES",
+      "ciudad": "PALO NEGRO"
+    },
+    {
+      "nombre": "AGENCIA 12030 LAS AMERICAS",
+      "ciudad": "MARACAY"
+    },
+    {
+      "nombre": "AGENCIA 12040 LA VICTORIA",
+      "ciudad": "LA VICTORIA"
+    },
+    {
+      "nombre": "AGENCIA 12050 CAGUA",
+      "ciudad": "CAGUA"
+    },
+    {
+      "nombre": "AGENCIA 12060 LA ENCRUCIJADA",
+      "ciudad": "LA ENCRUCIJADA"
+    },
+    {
+      "nombre": "AGENCIA 12070 SANTA CRUZ",
+      "ciudad": "SANTA CRUZ"
+    },
+    {
+      "nombre": "AGENCIA 12080 VILLA DE CURA",
+      "ciudad": "VILLA DE CURA"
+    },
+    {
+      "nombre": "AGENCIA 12090 SAN JUAN DE LOS MORROS",
+      "ciudad": "SAN JUAN DE LOS MORROS"
+    },
+    {
+      "nombre": "AGENCIA 12100 TURMERO",
+      "ciudad": "TURMERO"
+    },
+    {
+      "nombre": "AGENCIA 12110 ORO NEGRO",
+      "ciudad": "MARACAY"
+    }
+  ],
+  "Carabobo": [
+    {
+      "nombre": "AGENCIA 13010 VALENCIA PREBO",
+      "ciudad": "VALENCIA"
+    },
+    {
+      "nombre": "AGENCIA 13020 VALENCIA LA VIÑA",
+      "ciudad": "VALENCIA"
+    },
+    {
+      "nombre": "AGENCIA 13030 CC. METROPOLIS VALENCIA",
+      "ciudad": "VALENCIA"
+    },
+    {
+      "nombre": "AGENCIA 13040 SAN DIEGO",
+      "ciudad": "SAN DIEGO"
+    },
+    {
+      "nombre": "AGENCIA 13050 GUACARA",
+      "ciudad": "GUACARA"
+    },
+    {
+      "nombre": "AGENCIA 13060 LOS GUAYOS",
+      "ciudad": "LOS GUAYOS"
+    },
+    {
+      "nombre": "AGENCIA 13070 PUERTO CABELLO",
+      "ciudad": "PUERTO CABELLO"
+    },
+    {
+      "nombre": "AGENCIA 13080 MORON",
+      "ciudad": "MORON"
+    },
+    {
+      "nombre": "AGENCIA 13090 BEJUMA",
+      "ciudad": "BEJUMA"
+    },
+    {
+      "nombre": "AGENCIA 13100 TOCUYITO",
+      "ciudad": "TOCUYITO"
+    },
+    {
+      "nombre": "AGENCIA 13110 MIGUEL PEÑA",
+      "ciudad": "MIGUEL PEÑA"
+    },
+    {
+      "nombre": "AGENCIA 13120 CC. PASEO LAS INDUSTRIAS",
+      "ciudad": "VALENCIA"
+    },
+    {
+      "nombre": "AGENCIA 13130 NAGUANAGUA",
+      "ciudad": "NAGUANAGUA"
+    },
+    {
+      "nombre": "AGENCIA 13140 LOS JARALES",
+      "ciudad": "LOS JARALES"
+    },
+    {
+      "nombre": "AGENCIA 13150 GUACARA EL TURPIAL",
+      "ciudad": "GUACARA"
+    }
+  ],
+  "Lara": [
+    {
+      "nombre": "AGENCIA 14010 BARQUISIMETO ESTE",
+      "ciudad": "BARQUISIMETO"
+    },
+    {
+      "nombre": "AGENCIA 14020 CC. SAMBIL BARQUISIMETO",
+      "ciudad": "BARQUISIMETO"
+    },
+    {
+      "nombre": "AGENCIA 14030 BARQUISIMETO OESTE",
+      "ciudad": "BARQUISIMETO"
+    },
+    {
+      "nombre": "AGENCIA 14040 CABUDARE",
+      "ciudad": "CABUDARE"
+    },
+    {
+      "nombre": "AGENCIA 14050 EL TOCUYO",
+      "ciudad": "EL TOCUYO"
+    },
+    {
+      "nombre": "AGENCIA 14060 CARORA",
+      "ciudad": "CARORA"
+    },
+    {
+      "nombre": "AGENCIA 14070 QUIBOR",
+      "ciudad": "QUIBOR"
+    },
+    {
+      "nombre": "AGENCIA 14080 SARARE",
+      "ciudad": "SARARE"
+    },
+    {
+      "nombre": "AGENCIA 14090 DUACA",
+      "ciudad": "DUACA"
+    },
+    {
+      "nombre": "AGENCIA 14100 SANTA ROSA",
+      "ciudad": "SANTA ROSA"
+    },
+    {
+      "nombre": "AGENCIA 14110 EL CUJI",
+      "ciudad": "EL CUJI"
+    },
+    {
+      "nombre": "AGENCIA 14120 LA FUENTE",
+      "ciudad": "LA FUENTE"
+    }
+  ],
+  "Yaracuy": [
+    {
+      "nombre": "AGENCIA 15010 SAN FELIPE",
+      "ciudad": "SAN FELIPE"
+    },
+    {
+      "nombre": "AGENCIA 15020 CHIVACOA",
+      "ciudad": "CHIVACOA"
+    },
+    {
+      "nombre": "AGENCIA 15030 COCOROTE",
+      "ciudad": "COCOROTE"
+    },
+    {
+      "nombre": "AGENCIA 15040 NIRGUA",
+      "ciudad": "NIRGUA"
+    },
+    {
+      "nombre": "AGENCIA 15050 YUMARE",
+      "ciudad": "YUMARE"
+    }
+  ],
+  "Portuguesa": [
+    {
+      "nombre": "AGENCIA 16010 ACARIGUA",
+      "ciudad": "ACARIGUA"
+    },
+    {
+      "nombre": "AGENCIA 16020 ARAURE",
+      "ciudad": "ARAURE"
+    },
+    {
+      "nombre": "AGENCIA 16030 GUANARE",
+      "ciudad": "GUANARE"
+    },
+    {
+      "nombre": "AGENCIA 16040 BOCONOITO",
+      "ciudad": "BOCONOITO"
+    },
+    {
+      "nombre": "AGENCIA 16050 TUREN",
+      "ciudad": "TUREN"
+    },
+    {
+      "nombre": "AGENCIA 16060 LA ASCENCION",
+      "ciudad": "LA ASCENCION"
+    },
+    {
+      "nombre": "AGENCIA 16070 MESA DE CAVACAS",
+      "ciudad": "MESA DE CAVACAS"
+    },
+    {
+      "nombre": "AGENCIA 16080 PIRITU",
+      "ciudad": "PIRITU"
+    },
+    {
+      "nombre": "AGENCIA 16090 ARAURE CENTRO",
+      "ciudad": "ARAURE"
+    }
+  ],
+  "Cojedes": [
+    {
+      "nombre": "AGENCIA 17010 SAN CARLOS",
+      "ciudad": "SAN CARLOS"
+    },
+    {
+      "nombre": "AGENCIA 17020 TINARILLO",
+      "ciudad": "TINARILLO"
+    },
+    {
+      "nombre": "AGENCIA 17030 TINAQUILLO",
+      "ciudad": "TINAQUILLO"
+    },
+    {
+      "nombre": "AGENCIA 17040 MANRIQUE",
+      "ciudad": "MANRIQUE"
+    },
+    {
+      "nombre": "AGENCIA 17050 EL PAO",
+      "ciudad": "EL PAO"
+    }
+  ],
+  "Falcón": [
+    {
+      "nombre": "AGENCIA 18010 PUNTO FIJO",
+      "ciudad": "PUNTO FIJO"
+    },
+    {
+      "nombre": "AGENCIA 18020 CORO",
+      "ciudad": "CORO"
+    },
+    {
+      "nombre": "AGENCIA 18030 PUERTA DE FALCON",
+      "ciudad": "CHICHIRIVICHE"
+    },
+    {
+      "nombre": "AGENCIA 18040 CHICHIRIVICHE",
+      "ciudad": "CHICHIRIVICHE"
+    },
+    {
+      "nombre": "AGENCIA 18050 SANTA ANA",
+      "ciudad": "SANTA ANA"
+    },
+    {
+      "nombre": "AGENCIA 18060 PUNTO FIJO CENTRO",
+      "ciudad": "PUNTO FIJO"
+    }
+  ],
+  "Zulia": [
+    {
+      "nombre": "AGENCIA 24010 MARACAIBO CENTRO",
+      "ciudad": "MARACAIBO"
+    },
+    {
+      "nombre": "AGENCIA 24020 C.C. SAMBIL MARACAIBO",
+      "ciudad": "MARACAIBO"
+    },
+    {
+      "nombre": "AGENCIA 24030 MARACAIBO NORTE",
+      "ciudad": "MARACAIBO"
+    },
+    {
+      "nombre": "AGENCIA 24040 MARACAIBO SUR",
+      "ciudad": "MARACAIBO"
+    },
+    {
+      "nombre": "AGENCIA 24050 CIUDAD OJEDA",
+      "ciudad": "CIUDAD OJEDA"
+    },
+    {
+      "nombre": "AGENCIA 24060 CABIMAS",
+      "ciudad": "CABIMAS"
+    },
+    {
+      "nombre": "AGENCIA 24070 MACHIQUES",
+      "ciudad": "MACHIQUES"
+    },
+    {
+      "nombre": "AGENCIA 24080 SAN FRANCISCO",
+      "ciudad": "SAN FRANCISCO"
+    },
+    {
+      "nombre": "AGENCIA 24090 LA CAÑADA DE URDANETA",
+      "ciudad": "LA CAÑADA DE URDANETA"
+    },
+    {
+      "nombre": "AGENCIA 24100 VILLA DEL ROSARIO",
+      "ciudad": "VILLA DEL ROSARIO"
+    },
+    {
+      "nombre": "AGENCIA 24110 SANTA RITA",
+      "ciudad": "SANTA RITA"
+    },
+    {
+      "nombre": "AGENCIA 24120 LAGUNILLAS",
+      "ciudad": "LAGUNILLAS"
+    },
+    {
+      "nombre": "AGENCIA 24130 LA CONCEPCION",
+      "ciudad": "LA CONCEPCION"
+    },
+    {
+      "nombre": "AGENCIA 24140 MARACAIBO IRAMA",
+      "ciudad": "MARACAIBO"
+    },
+    {
+      "nombre": "AGENCIA 24150 SANTA BARBARA DEL ZULIA",
+      "ciudad": "SANTA BARBARA"
+    },
+    {
+      "nombre": "AGENCIA 24160 EL VENADO",
+      "ciudad": "MENE GRANDE"
+    },
+    {
+      "nombre": "AGENCIA 24170 CIUDAD OJEDA CENTRO",
+      "ciudad": "CIUDAD OJEDA"
+    }
+  ],
+  "Anzoátegui": [
+    {
+      "nombre": "AGENCIA 25010 BARCELONA",
+      "ciudad": "BARCELONA"
+    },
+    {
+      "nombre": "AGENCIA 25020 PUERTO LA CRUZ",
+      "ciudad": "PUERTO LA CRUZ"
+    },
+    {
+      "nombre": "AGENCIA 25030 LECHERIA",
+      "ciudad": "LECHERIA"
+    },
+    {
+      "nombre": "AGENCIA 25040 GUANTA",
+      "ciudad": "GUANTA"
+    },
+    {
+      "nombre": "AGENCIA 25050 EL TIGRE",
+      "ciudad": "EL TIGRE"
+    },
+    {
+      "nombre": "AGENCIA 25060 ANACO",
+      "ciudad": "ANACO"
+    },
+    {
+      "nombre": "AGENCIA 25070 ARAGUA DE BARCELONA",
+      "ciudad": "ARAGUA DE BARCELONA"
+    },
+    {
+      "nombre": "AGENCIA 25080 CLARINES",
+      "ciudad": "CLARINES"
+    },
+    {
+      "nombre": "AGENCIA 25090 PUERTO PIRITU",
+      "ciudad": "PUERTO PIRITU"
+    },
+    {
+      "nombre": "AGENCIA 25100 BOCA DE UCHIRE",
+      "ciudad": "BOCA DE UCHIRE"
+    },
+    {
+      "nombre": "AGENCIA 25110 C.C. CRISTAL BARCELONA",
+      "ciudad": "BARCELONA"
+    }
+  ],
+  "Sucre": [
+    {
+      "nombre": "AGENCIA 26010 CUMANA",
+      "ciudad": "CUMANA"
+    },
+    {
+      "nombre": "AGENCIA 26020 CARUPANO",
+      "ciudad": "CARUPANO"
+    },
+    {
+      "nombre": "AGENCIA 26030 CUMANA CENTRO",
+      "ciudad": "CUMANA"
+    },
+    {
+      "nombre": "AGENCIA 26040 GUIRIA",
+      "ciudad": "GUIRIA"
+    },
+    {
+      "nombre": "AGENCIA 26050 SAN ANTONIO DEL GOLFO",
+      "ciudad": "SAN ANTONIO DEL GOLFO"
+    }
+  ],
+  "Monagas": [
+    {
+      "nombre": "AGENCIA 27010 MATURIN",
+      "ciudad": "MATURIN"
+    },
+    {
+      "nombre": "AGENCIA 27020 PUNTA DE MATA",
+      "ciudad": "PUNTA DE MATA"
+    },
+    {
+      "nombre": "AGENCIA 27030 CARIPITO",
+      "ciudad": "CARIPITO"
+    },
+    {
+      "nombre": "AGENCIA 27040 TEMBLADOR",
+      "ciudad": "TEMBLADOR"
+    },
+    {
+      "nombre": "AGENCIA 27050 URB. LOS COCOS",
+      "ciudad": "MATURIN"
+    }
+  ],
+  "Nueva Esparta": [
+    {
+      "nombre": "AGENCIA 28010 PORLAMAR",
+      "ciudad": "PORLAMAR"
+    },
+    {
+      "nombre": "AGENCIA 28020 JUAN GRIEGO",
+      "ciudad": "JUAN GRIEGO"
+    },
+    {
+      "nombre": "AGENCIA 28030 PAMPATAR",
+      "ciudad": "PAMPATAR"
+    },
+    {
+      "nombre": "AGENCIA 28040 PORLAMAR CENTRO",
+      "ciudad": "PORLAMAR"
+    }
+  ],
+  "Amazonas": [
+    {
+      "nombre": "AGENCIA 29010 PUERTO AYACUCHO",
+      "ciudad": "PUERTO AYACUCHO"
+    }
+  ],
+  "Bolívar": [
+    {
+      "nombre": "AGENCIA 30010 CIUDAD BOLIVAR",
+      "ciudad": "CIUDAD BOLIVAR"
+    },
+    {
+      "nombre": "AGENCIA 30020 CIUDAD GUAYANA",
+      "ciudad": "CIUDAD GUAYANA"
+    },
+    {
+      "nombre": "AGENCIA 30030 UPATA",
+      "ciudad": "UPATA"
+    },
+    {
+      "nombre": "AGENCIA 30040 SAN FELIX",
+      "ciudad": "SAN FELIX"
+    },
+    {
+      "nombre": "AGENCIA 30050 PUERTO ORDAZ",
+      "ciudad": "PUERTO ORDAZ"
+    },
+    {
+      "nombre": "AGENCIA 30060 SANTA ELENA DE UAIREN",
+      "ciudad": "SANTA ELENA DE UAIREN"
+    },
+    {
+      "nombre": "AGENCIA 30070 EL CALLAO",
+      "ciudad": "EL CALLAO"
+    },
+    {
+      "nombre": "AGENCIA 30080 CIUDAD PIAR",
+      "ciudad": "CIUDAD PIAR"
+    },
+    {
+      "nombre": "AGENCIA 30090 LOS PINOS PUERTO ORDAZ",
+      "ciudad": "PUERTO ORDAZ"
+    }
+  ],
+  "Delta Amacuro": [
+    {
+      "nombre": "AGENCIA 31010 TUCUPITA",
+      "ciudad": "TUCUPITA"
+    }
+  ],
+  "Guárico": [
+    {
+      "nombre": "AGENCIA 32010 SAN JUAN DE LOS MORROS",
+      "ciudad": "SAN JUAN DE LOS MORROS"
+    },
+    {
+      "nombre": "AGENCIA 32020 VALLE DE LA PASCUA",
+      "ciudad": "VALLE DE LA PASCUA"
+    },
+    {
+      "nombre": "AGENCIA 32030 CALABOZO",
+      "ciudad": "CALABOZO"
+    },
+    {
+      "nombre": "AGENCIA 32040 ALTAGRACIA DE ORITUCO",
+      "ciudad": "ALTAGRACIA DE ORITUCO"
+    },
+    {
+      "nombre": "AGENCIA 32050 TUCUPIDO",
+      "ciudad": "TUCUPIDO"
+    }
+  ],
+  "Apure": [
+    {
+      "nombre": "AGENCIA 33010 SAN FERNANDO DE APURE",
+      "ciudad": "SAN FERNANDO DE APURE"
+    },
+    {
+      "nombre": "AGENCIA 33020 BIRUACA",
+      "ciudad": "BIRUACA"
+    }
+  ],
+  "Mérida": [
+    {
+      "nombre": "AGENCIA 34010 MERIDA",
+      "ciudad": "MERIDA"
+    },
+    {
+      "nombre": "AGENCIA 34020 EJIDO",
+      "ciudad": "EJIDO"
+    },
+    {
+      "nombre": "AGENCIA 34030 TOVAR",
+      "ciudad": "TOVAR"
+    },
+    {
+      "nombre": "AGENCIA 34040 EL VIGIA",
+      "ciudad": "EL VIGIA"
+    },
+    {
+      "nombre": "AGENCIA 34050 STA. CRUZ DE MORA",
+      "ciudad": "STA. CRUZ DE MORA"
+    }
+  ],
+  "Trujillo": [
+    {
+      "nombre": "AGENCIA 35010 VALERA",
+      "ciudad": "VALERA"
+    },
+    {
+      "nombre": "AGENCIA 35020 TRUJILLO",
+      "ciudad": "TRUJILLO"
+    },
+    {
+      "nombre": "AGENCIA 35030 BOGOTA",
+      "ciudad": "BOGOTA"
+    },
+    {
+      "nombre": "AGENCIA 35040 CARVAJAL",
+      "ciudad": "CARVAJAL"
+    },
+    {
+      "nombre": "AGENCIA 35050 MONTE CARMELO",
+      "ciudad": "MONTE CARMELO"
+    }
+  ],
+  "Táchira": [
+    {
+      "nombre": "AGENCIA 36010 SAN CRISTOBAL",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36020 TARIA",
+      "ciudad": "TARIA"
+    },
+    {
+      "nombre": "AGENCIA 36030 LA FRONTERA",
+      "ciudad": "LA FRONTERA"
+    },
+    {
+      "nombre": "AGENCIA 36040 RUBIO",
+      "ciudad": "RUBIO"
+    },
+    {
+      "nombre": "AGENCIA 36050 SAN ANTONIO DEL TACHIRA",
+      "ciudad": "SAN ANTONIO DEL TACHIRA"
+    },
+    {
+      "nombre": "AGENCIA 36060 LA GRITA",
+      "ciudad": "LA GRITA"
+    },
+    {
+      "nombre": "AGENCIA 36070 COLON",
+      "ciudad": "COLON"
+    },
+    {
+      "nombre": "AGENCIA 36080 CONTRATOS",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36090 SAN CRISTOBAL LAS VEGAS",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36100 LA CONCORDIA",
+      "ciudad": "LA CONCORDIA"
+    },
+    {
+      "nombre": "AGENCIA 36110 PASEO LA ERMITA",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36120 PUERTO ORDAZ",
+      "ciudad": "PUERTO ORDAZ"
+    },
+    {
+      "nombre": "AGENCIA 36130 MERIDA",
+      "ciudad": "MERIDA"
+    },
+    {
+      "nombre": "AGENCIA 36140 SAN CRISTOBAL 2",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36150 SAN CRISTOBAL 3",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36160 SAN CRISTOBAL 4",
+      "ciudad": "SAN CRISTOBAL"
+    },
+    {
+      "nombre": "AGENCIA 36170 SAN CRISTOBAL 5",
+      "ciudad": "SAN CRISTOBAL"
+    }
+  ],
+  "Barinas": [
+    {
+      "nombre": "BARINAS ZONA IND.",
+      "ciudad": "Barinas"
+    },
+    {
+      "nombre": "ALTO BARINAS",
+      "ciudad": "Barinas"
+    },
+    {
+      "nombre": "BARINAS",
+      "ciudad": "Barinas"
+    },
+    {
+      "nombre": "BARINAS 23 DE ENERO",
+      "ciudad": "Barinas"
+    }
+  ]
+}
