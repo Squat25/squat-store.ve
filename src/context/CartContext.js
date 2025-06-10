@@ -5,6 +5,7 @@ export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   // Cargar carrito desde localStorage al iniciar
   useEffect(() => {
@@ -23,29 +24,42 @@ export const CartProvider = ({ children }) => {
     }
   }, [cart]);
 
-  // Añadir producto al carrito
+  // Añadir producto al carrito y abrir el drawer
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.id === product.id);
+      // Buscar si ya existe un ítem con la misma combinación de id, talla y color
+      const existing = prevCart.find(
+        (item) =>
+          item.id === product.id &&
+          item.size === product.size &&
+          item.color === product.color
+      );
       if (existing) {
+        // Sumar cantidad si ya existe
         return prevCart.map((item) =>
-          item.id === product.id
+          item.id === product.id &&
+          item.size === product.size &&
+          item.color === product.color
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
+        // Crear nuevo ítem
         return [
           ...prevCart,
           {
             id: product.id,
             name: product.name,
             price: product.price,
-            image: product.image, // Asegúrate de pasar la url de la imagen
+            image: product.image,
+            size: product.size,
+            color: product.color,
             quantity: 1,
           },
         ];
       }
     });
+    setDrawerOpen(true); // Abrir drawer automáticamente
   };
 
   // Eliminar producto del carrito
@@ -83,6 +97,8 @@ export const CartProvider = ({ children }) => {
         updateQuantity,
         clearCart,
         cartTotal,
+        drawerOpen,
+        setDrawerOpen,
       }}
     >
       {children}

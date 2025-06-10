@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   HiOutlineMenu,
   HiOutlineX,
@@ -15,6 +15,8 @@ import {
   HiOutlineSparkles,
   HiOutlineGift,
 } from "react-icons/hi";
+import CartDrawer from "./CartDrawer";
+import { CartContext } from "../context/CartContext";
 
 const categories = [
   {
@@ -43,6 +45,7 @@ const Header = () => {
   const router = useRouter();
   const { data: session } = useSession();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { setDrawerOpen, cart } = useContext(CartContext);
 
   const handleLogout = () => {
     signOut();
@@ -91,9 +94,19 @@ const Header = () => {
           >
             <HiOutlineHeart className="w-6 h-6" />
           </Link>
-          <Link href="/cart" className="text-gray-700 hover:text-black p-2">
+          <button
+            className="relative text-gray-700 hover:text-black p-2 focus:outline-none"
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Abrir carrito"
+          >
             <HiOutlineShoppingBag className="w-6 h-6" />
-          </Link>
+            {cart.length > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
+                {cart.length}
+              </span>
+            )}
+          </button>
+          <CartDrawer />
           {session?.user ? (
             <div className="flex items-center space-x-2">
               <Link

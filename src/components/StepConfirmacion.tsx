@@ -20,15 +20,24 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const { data: session } = useSession();
+  const [cartSnapshot, setCartSnapshot] = useState([]); // Copia local del carrito
+  const [cartTotalSnapshot, setCartTotalSnapshot] = useState(0);
 
   useEffect(() => {
     localStorage.removeItem("checkout_datosEntrega");
   }, []);
 
   const handleConfirmar = async () => {
+    if (loading) return; // Evita doble envío
+    if (cart.length === 0) {
+      setError("No puedes confirmar un pedido con el carrito vacío.");
+      return;
+    }
     setLoading(true);
     setError("");
     setSuccess(false);
+    setCartSnapshot(cart); // Guardar copia antes de vaciar
+    setCartTotalSnapshot(cartTotal);
     try {
       const res = await fetch("/api/pedidos", {
         method: "POST",
@@ -98,22 +107,23 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
       </div>
       <div className="bg-gray-100 p-4 rounded mb-4">
         <h3 className="font-bold mb-2">Resumen del Carrito:</h3>
-        {cart.length === 0 ? (
+        {(success ? cartSnapshot.length === 0 : cart.length === 0) ? (
           <div className="text-red-600">Tu carrito está vacío.</div>
         ) : (
           <table className="w-full text-sm">
             <thead>
               <tr>
                 <th className="text-left">Producto</th>
+                <th>Talla</th>
+                <th>Color</th>
                 <th>Cantidad</th>
                 <th>Precio</th>
                 <th>Subtotal</th>
-                <th></th>
               </tr>
             </thead>
             <tbody>
-              {cart.map((item) => (
-                <tr key={item.id} className="border-t">
+              {(success ? cartSnapshot : cart).map((item) => (
+                <tr key={item.id + item.size + item.color} className="border-t">
                   <td className="flex items-center gap-2 py-2">
                     {item.image && (
                       <img
@@ -124,57 +134,35 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
                     )}
                     {item.name}
                   </td>
+                  <td className="text-center">{item.size}</td>
                   <td className="text-center">
-                    <div className="flex items-center justify-center gap-1">
-                      <button
-                        type="button"
-                        className="px-2 py-1 bg-gray-200 rounded"
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity - 1)
-                        }
-                        disabled={item.quantity <= 1}
-                      >
-                        -
-                      </button>
-                      <span className="mx-2">{item.quantity}</span>
-                      <button
-                        type="button"
-                        className="px-2 py-1 bg-gray-200 rounded"
-                        onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
+                    <span
+                      className="inline-block w-4 h-4 rounded-full border align-middle"
+                      style={{ background: item.color, borderColor: "#ccc" }}
+                      title={item.color}
+                    ></span>
                   </td>
+                  <td className="text-center">{item.quantity}</td>
                   <td className="text-center">
                     ${item.price.toLocaleString()}
                   </td>
                   <td className="text-center font-semibold">
                     ${(item.price * item.quantity).toLocaleString()}
                   </td>
-                  <td className="text-center">
-                    <button
-                      type="button"
-                      className="px-2 py-1 bg-red-500 text-white rounded"
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      Eliminar
-                    </button>
-                  </td>
                 </tr>
               ))}
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan={3} className="text-right font-bold pt-2">
+                <td colSpan={5} className="text-right font-bold pt-2">
                   Total:
                 </td>
                 <td className="text-center font-bold pt-2">
-                  ${cartTotal.toLocaleString()}
+                  $
+                  {success
+                    ? cartTotalSnapshot.toLocaleString()
+                    : cartTotal.toLocaleString()}
                 </td>
-                <td></td>
               </tr>
             </tfoot>
           </table>
@@ -187,9 +175,9 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
         Atrás
       </button>
       <button
-        className="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded"
+        className="mt-4 ml-2 px-4 py-2 bg-green-600 text-white rounded disabled:opacity-50"
         onClick={handleConfirmar}
-        disabled={loading}
+        disabled={loading || cart.length === 0}
       >
         {loading ? "Enviando..." : "Confirmar Pedido"}
       </button>
