@@ -40,9 +40,8 @@ export default function CategoriasDestacadas() {
         Explora por Categoría
       </h2>
       <div
-        className="grid gap-4"
+        className="flex flex-col gap-4 md:grid md:gap-4"
         style={{
-          display: "grid",
           gridTemplateAreas:
             '"damas nuevas_temporadas caballeros" "accesorios nuevas_temporadas calzados"',
           gridTemplateColumns: "1fr 2fr 1fr",
@@ -53,8 +52,8 @@ export default function CategoriasDestacadas() {
           <Link
             key={cat.nombre}
             href={cat.href}
-            className="relative rounded-xl overflow-hidden group flex items-end shadow-lg"
-            style={{ gridArea: cat.area, minHeight: 0 }}
+            className="relative rounded-xl overflow-hidden group flex items-end shadow-lg w-full min-h-[180px] h-44 sm:h-56 md:min-h-0 md:h-auto md:w-auto"
+            style={{ gridArea: cat.area }}
           >
             <img
               src={cat.imagen}
@@ -62,8 +61,8 @@ export default function CategoriasDestacadas() {
               className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
               draggable={false}
             />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300" />
-            <span className="relative z-10 text-white text-2xl sm:text-3xl font-extrabold p-6 drop-shadow-lg">
+            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-300" />
+            <span className="relative z-10 text-white text-xl sm:text-2xl md:text-3xl font-extrabold px-4 py-2 drop-shadow-lg text-center w-full">
               {cat.nombre}
             </span>
           </Link>
@@ -71,9 +70,22 @@ export default function CategoriasDestacadas() {
       </div>
       <style jsx>{`
         @media (max-width: 768px) {
-          div[style*="grid-template-areas"] {
+          .md\:grid {
             display: flex !important;
-            flex-direction: column;
+            flex-direction: column !important;
+            gap: 1.25rem !important;
+          }
+          .md\:grid a {
+            min-height: 180px !important;
+            height: 44vw !important;
+            max-height: 220px !important;
+            border-radius: 1rem !important;
+          }
+          .md\:grid span {
+            font-size: 1.35rem !important;
+            padding: 1.25rem 0.5rem !important;
+            text-align: center !important;
+            width: 100% !important;
           }
         }
       `}</style>

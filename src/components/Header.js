@@ -9,7 +9,6 @@ import {
   HiOutlineX,
   HiOutlineSearch,
   HiOutlineUser,
-  HiOutlineHeart,
   HiOutlineShoppingBag,
   HiOutlineTag,
   HiOutlineSparkles,
@@ -43,7 +42,8 @@ const categories = [
 
 const Header = () => {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
   const [menuOpen, setMenuOpen] = useState(false);
   const { setDrawerOpen, cart } = useContext(CartContext);
 
@@ -54,17 +54,17 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md w-full">
-      <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-8">
         {/* Logo */}
         <div className="flex items-center flex-shrink-0">
           <Link href="/">
             <Image
               src="/LogoNegro.png"
               alt="Squat Logo"
-              width={120}
-              height={40}
+              width={80}
+              height={30}
               priority
-              className="h-10 w-auto"
+              className="h-8 w-auto md:h-10 md:w-auto"
             />
           </Link>
         </div>
@@ -84,15 +84,9 @@ const Header = () => {
         </nav>
 
         {/* Acciones */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <Link href="/search" className="text-gray-700 hover:text-black p-2">
             <HiOutlineSearch className="w-6 h-6" />
-          </Link>
-          <Link
-            href="/favorites"
-            className="text-gray-700 hover:text-black p-2"
-          >
-            <HiOutlineHeart className="w-6 h-6" />
           </Link>
           <button
             className="relative text-gray-700 hover:text-black p-2 focus:outline-none"
@@ -107,31 +101,43 @@ const Header = () => {
             )}
           </button>
           <CartDrawer />
-          {session?.user ? (
-            <div className="flex items-center space-x-2">
-              <Link
-                href="/profile"
-                className="flex items-center gap-1 text-black text-sm md:text-base font-medium hover:underline"
-              >
-                <HiOutlineUser className="w-6 h-6" />
-                Perfil
-              </Link>
-              <button
-                onClick={() => signOut()}
-                className="text-black hover:text-gray-500 transition-colors duration-200 text-sm md:text-base"
-              >
-                Cerrar Sesión
-              </button>
-            </div>
-          ) : (
+          {/* Ícono usuario solo en mobile, sin texto */}
+          {!isLoading && (
             <Link
-              href="/login"
-              className="flex items-center gap-1 text-black hover:text-gray-500 transition-colors duration-200 text-sm md:text-base"
+              href={session?.user ? "/profile" : "/login"}
+              className="block md:hidden text-gray-700 hover:text-black p-2"
+              aria-label={session?.user ? "Perfil" : "Iniciar Sesión"}
             >
               <HiOutlineUser className="w-6 h-6" />
-              Iniciar Sesión
             </Link>
           )}
+          {/* Acceso usuario solo en desktop */}
+          {!isLoading &&
+            (session?.user ? (
+              <div className="hidden md:flex items-center space-x-2">
+                <Link
+                  href="/profile"
+                  className="flex items-center gap-1 text-black text-sm md:text-base font-medium hover:underline"
+                >
+                  <HiOutlineUser className="w-6 h-6" />
+                  Perfil
+                </Link>
+                <button
+                  onClick={() => signOut()}
+                  className="text-black hover:text-gray-500 transition-colors duration-200 text-sm md:text-base"
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
+            ) : (
+              <Link
+                href="/login"
+                className="hidden md:flex items-center gap-1 text-black hover:text-gray-500 transition-colors duration-200 text-sm md:text-base"
+              >
+                <HiOutlineUser className="w-6 h-6" />
+                Iniciar Sesión
+              </Link>
+            ))}
           {/* Menú hamburguesa - solo móvil */}
           <button
             className="md:hidden text-gray-700 hover:text-black p-2 focus:outline-none"
@@ -184,13 +190,6 @@ const Header = () => {
                 onClick={() => setMenuOpen(false)}
               >
                 <HiOutlineSearch className="w-5 h-5" /> Buscar
-              </Link>
-              <Link
-                href="/favorites"
-                className="flex items-center gap-2 text-gray-700 hover:text-black px-2 py-2"
-                onClick={() => setMenuOpen(false)}
-              >
-                <HiOutlineHeart className="w-5 h-5" /> Favoritos
               </Link>
               <Link
                 href="/cart"
