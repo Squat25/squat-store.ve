@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { request } from "../lib/datocms";
+import { getBestSellers } from "../lib/datocms";
 
 const HOMEPAGE_QUERY = `
   query AllProducts {
@@ -36,8 +37,17 @@ export default function HomeClient() {
     async function fetchProducts() {
       try {
         setLoading(true);
+        // Trae todos los productos
         const data = await request({ query: HOMEPAGE_QUERY });
-        setProducts(data?.allProducts || []);
+        // Trae los best sellers
+        const bestSellers = await getBestSellers();
+        // Saca los slugs de los best sellers
+        const bestSellerSlugs = bestSellers.map((p) => p.slug);
+        // Filtra los productos que NO están en best sellers
+        const productosSinRepetidos = (data?.allProducts || []).filter(
+          (p) => !bestSellerSlugs.includes(p.slug)
+        );
+        setProducts(productosSinRepetidos);
       } catch (err) {
         setError("Error cargando productos");
       } finally {
@@ -51,7 +61,36 @@ export default function HomeClient() {
   console.log("PRODUCTS:", products);
 
   if (loading) {
-    return <div className="text-center py-12">Cargando productos...</div>;
+    return (
+      <section className="py-8 px-4">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          Nuestros Productos
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div
+              key={i}
+              className="bg-white p-4 rounded-lg shadow-md flex flex-col items-center text-center animate-pulse"
+            >
+              <div className="w-full h-60 bg-gray-200 rounded-md mb-4" />
+              <div className="h-5 w-2/3 bg-gray-200 rounded mb-2" />
+              <div className="h-4 w-1/2 bg-gray-200 rounded mb-4" />
+              <div className="flex gap-2 mb-4 w-full justify-center">
+                {Array.from({ length: 4 }).map((_, j) => (
+                  <div key={j} className="w-10 h-6 bg-gray-200 rounded" />
+                ))}
+              </div>
+              <div className="flex gap-2 mb-4 w-full justify-center">
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <div key={j} className="w-6 h-6 bg-gray-200 rounded-full" />
+                ))}
+              </div>
+              <div className="h-8 w-full bg-gray-200 rounded" />
+            </div>
+          ))}
+        </div>
+      </section>
+    );
   }
   if (error) {
     return <div className="text-center text-red-500 py-12">{error}</div>;
@@ -109,7 +148,7 @@ export default function HomeClient() {
               return (
                 <div
                   key={product.id}
-                  className="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center"
+                  className="bg-white p-4 rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center group"
                 >
                   {product.images && product.images.url ? (
                     <Image
@@ -117,7 +156,7 @@ export default function HomeClient() {
                       alt={product.images.alt || product.name}
                       width={product.images.width || 300}
                       height={product.images.height || 300}
-                      className="w-full h-auto rounded-md mb-4 object-cover"
+                      className="w-full h-auto rounded-md mb-4 object-cover transition-transform duration-300 group-hover:scale-105"
                       style={{ objectFit: "cover" }}
                       priority
                     />
@@ -133,7 +172,7 @@ export default function HomeClient() {
                     ${product.price.toFixed(2)}
                   </p>
                   {/* Selector de tallas */}
-                  <div className="flex gap-2 mb-2">
+                  <div className="flex gap-2 mb-4">
                     {sizes.map((size) => (
                       <button
                         key={size}

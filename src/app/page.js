@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react";
 import HeroSlider from "../components/HeroSlider";
 import HomeClient from "../components/HomeClient";
 import CategoriasDestacadas from "../components/CategoriasDestacadas";
+import LoMasVendido from "../components/LoMasVendido";
 
 export default function HomePage() {
   const { data: session } = useSession();
@@ -18,6 +19,7 @@ export default function HomePage() {
       </div>
       <HomeClient />
       <CategoriasDestacadas />
+      <LoMasVendido />
     </>
   );
 }

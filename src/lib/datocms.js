@@ -27,3 +27,35 @@ export async function request({ query, variables, preview }) {
   }
   return data;
 }
+
+export async function getBestSellers() {
+  const query = `
+    {
+      allProducts(
+        filter: { bestseller: { eq: true } }
+      ) {
+        id
+        description
+        price
+        images {
+          url
+        }
+        slug
+        categories {
+          name
+        }
+      }
+    }
+  `;
+  const res = await fetch("https://graphql.datocms.com/", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_DATO_CMS_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query }),
+  });
+  const response = await res.json();
+  console.log("Respuesta completa de DatoCMS:", response);
+  return response.data.allProducts;
+}
