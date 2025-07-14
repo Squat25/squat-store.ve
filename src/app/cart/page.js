@@ -5,10 +5,22 @@ import { CartContext } from "../../context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa"; // Asegúrate de haber instalado react-icons
+import { useToast } from "../../components/Toast";
 
 const CartPage = () => {
   const { cart, cartTotal, removeFromCart, updateQuantity, clearCart } =
     useContext(CartContext);
+  const { success } = useToast();
+
+  const handleRemove = (id) => {
+    removeFromCart(id);
+    success("Producto eliminado del carrito");
+  };
+
+  const handleClear = () => {
+    clearCart();
+    success("Carrito vaciado");
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -86,7 +98,7 @@ const CartPage = () => {
                     ${(item.price * item.quantity).toFixed(2)}
                   </p>
                   <button
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() => handleRemove(item.id)}
                     className="text-red-500 hover:text-red-700 text-2xl cursor-pointer transition-colors duration-200 p-2 rounded-full hover:bg-red-50"
                     aria-label="Eliminar producto"
                   >
@@ -133,7 +145,7 @@ const CartPage = () => {
               Proceder al Pago
             </Link>
             <button
-              onClick={clearCart}
+              onClick={handleClear}
               className="w-full text-center mt-4 text-red-500 hover:text-red-700 font-semibold py-2 transition-colors duration-300"
             >
               Vaciar Carrito

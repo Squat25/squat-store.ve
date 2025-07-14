@@ -12,7 +12,12 @@ export const CartProvider = ({ children }) => {
     if (typeof window !== "undefined") {
       const storedCart = localStorage.getItem("cart");
       if (storedCart) {
-        setCart(JSON.parse(storedCart));
+        try {
+          setCart(JSON.parse(storedCart));
+        } catch (error) {
+          console.error("Error parsing cart from localStorage:", error);
+          localStorage.removeItem("cart");
+        }
       }
     }
   }, []);
@@ -24,25 +29,32 @@ export const CartProvider = ({ children }) => {
     }
   }, [cart]);
 
+  // Función helper para generar ID único de variante
+  const getVariantId = (product) => {
+    return `${product.id}-${product.size}-${product.color}`;
+  };
+
   // Añadir producto al carrito y abrir el drawer
   const addToCart = (product) => {
+    if (!product.id || !product.size || !product.color) {
+      console.error("Producto incompleto:", product);
+      return;
+    }
+
     setCart((prevCart) => {
-      // Buscar si ya existe un ítem con la misma combinación de id, talla y color
-      const existing = prevCart.find(
-        (item) =>
-          item.id === product.id &&
-          item.size === product.size &&
-          item.color === product.color
+      const variantId = getVariantId(product);
+      const existingIndex = prevCart.findIndex(
+        (item) => getVariantId(item) === variantId
       );
-      if (existing) {
-        // Sumar cantidad si ya existe
-        return prevCart.map((item) =>
-          item.id === product.id &&
-          item.size === product.size &&
-          item.color === product.color
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
+
+      if (existingIndex >= 0) {
+        // Actualizar cantidad si ya existe
+        const updatedCart = [...prevCart];
+        updatedCart[existingIndex] = {
+          ...updatedCart[existingIndex],
+          quantity: updatedCart[existingIndex].quantity + 1,
+        };
+        return updatedCart;
       } else {
         // Crear nuevo ítem
         return [
@@ -59,24 +71,32 @@ export const CartProvider = ({ children }) => {
         ];
       }
     });
-    setDrawerOpen(true); // Abrir drawer automáticamente
+    setDrawerOpen(true);
   };
 
   // Eliminar producto del carrito
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== productId));
+  const removeFromCart = (productId, size, color) => {
+    const variantId = `${productId}-${size}-${color}`;
+    setCart((prevCart) =>
+      prevCart.filter((item) => getVariantId(item) !== variantId)
+    );
   };
 
   // Actualizar cantidad de un producto
-  const updateQuantity = (productId, newQuantity) => {
-    setCart((prevCart) => {
-      if (newQuantity <= 0) {
-        return prevCart.filter((item) => item.id !== productId);
-      }
-      return prevCart.map((item) =>
-        item.id === productId ? { ...item, quantity: newQuantity } : item
-      );
-    });
+  const updateQuantity = (productId, size, color, newQuantity) => {
+    if (newQuantity <= 0) {
+      removeFromCart(productId, size, color);
+      return;
+    }
+
+    const variantId = `${productId}-${size}-${color}`;
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        getVariantId(item) === variantId
+          ? { ...item, quantity: newQuantity }
+          : item
+      )
+    );
   };
 
   // Vaciar carrito
@@ -85,6 +105,12 @@ export const CartProvider = ({ children }) => {
   // Calcular total del carrito
   const cartTotal = useMemo(
     () => cart.reduce((total, item) => total + item.price * item.quantity, 0),
+    [cart]
+  );
+
+  // Calcular cantidad total de items
+  const cartItemsCount = useMemo(
+    () => cart.reduce((total, item) => total + item.quantity, 0),
     [cart]
   );
 
@@ -97,6 +123,7 @@ export const CartProvider = ({ children }) => {
         updateQuantity,
         clearCart,
         cartTotal,
+        cartItemsCount,
         drawerOpen,
         setDrawerOpen,
       }}

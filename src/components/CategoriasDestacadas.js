@@ -68,27 +68,6 @@ export default function CategoriasDestacadas() {
           </Link>
         ))}
       </div>
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .md\:grid {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 1.25rem !important;
-          }
-          .md\:grid a {
-            min-height: 180px !important;
-            height: 44vw !important;
-            max-height: 220px !important;
-            border-radius: 1rem !important;
-          }
-          .md\:grid span {
-            font-size: 1.35rem !important;
-            padding: 1.25rem 0.5rem !important;
-            text-align: center !important;
-            width: 100% !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

@@ -1,0 +1,188 @@
+/* Tailwind v3: Puedes usar @apply para utilidades de Tailwind aquí. */
+
+.test {
+  @apply flex items-center justify-center;
+}
+
+/* Estilos utilitarios para SquatQuestionnaire tipo "Véndenos tu auto" */
+
+.sContainer {
+  @apply flex flex-col items-center justify-between w-full min-h-[500px] bg-white;
+}
+
+@media (min-width: 1024px) {
+  .sContainer {
+    @apply flex-row;
+    align-items: center;
+  }
+}
+
+.sLeft {
+  @apply w-full flex flex-col justify-center px-4 py-6 text-center relative z-[1] mb-8;
+}
+
+@media (min-width: 768px) {
+  .sLeft {
+    @apply px-10 py-12 text-left mb-10;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sLeft {
+    @apply flex-1 px-16 py-20 mb-0;
+  }
+}
+
+.sTitle {
+  @apply font-extrabold text-gray-900 text-2xl mb-6;
+}
+
+@media (min-width: 768px) {
+  .sTitle {
+    @apply text-3xl;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sTitle {
+    @apply text-[2.5rem];
+  }
+}
+
+.sList {
+  @apply space-y-4 mb-8;
+}
+
+.sListItem {
+  @apply flex items-center text-base text-gray-800 gap-3;
+}
+
+@media (min-width: 768px) {
+  .sListItem {
+    @apply text-lg;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sListItem {
+    @apply text-xl;
+  }
+}
+
+.sCheck {
+  @apply w-6 h-6 text-yellow-400 flex-shrink-0;
+}
+
+.sFormCard {
+  @apply w-full rounded-xl shadow-xl p-4 bg-white relative z-[1];
+  margin: 1.5rem 0 0 0;
+  max-width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .sFormCard {
+    @apply p-8;
+    margin: 2rem auto 0 auto;
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sFormCard {
+    @apply p-10;
+    margin: 2rem 2rem 2rem 0;
+    max-width: 420px;
+  }
+}
+
+.sForm {
+  @apply flex flex-col gap-4 w-full;
+}
+
+.sLabel {
+  @apply font-semibold text-gray-700 mb-1;
+}
+
+.sInput {
+  @apply border border-gray-300 rounded-lg px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-yellow-400 transition;
+}
+
+@media (min-width: 768px) {
+  .sInput {
+    @apply text-lg;
+  }
+}
+
+.sButton {
+  @apply bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold rounded-lg py-3 mt-2 transition text-lg shadow-lg;
+}
+
+.sCheckboxRow {
+  @apply flex items-center gap-2 mt-2;
+}
+
+.sCheckbox {
+  @apply w-5 h-5 accent-yellow-400 rounded border-gray-300;
+}
+
+.sCheckboxGroup {
+  @apply flex flex-wrap gap-x-4 gap-y-2 mb-2;
+}
+
+.sTerms {
+  @apply text-xs text-gray-500;
+}
+
+.sError {
+  @apply text-red-600 text-sm mt-1;
+}
+
+.sBackground {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.45),rgba(255,255,255,0.45)), url('/nuevasTemporadas.png');
+  background-size: cover;
+  background-position: center 30%;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sContainer {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .sLeft {
+    background: rgba(255,255,255,0.85);
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 24px 0 rgba(80, 80, 160, 0.10);
+    border: 1.5px solid #ede9fe;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .sTitle {
+    @apply text-4xl font-extrabold mb-8;
+  }
+  .sListItem {
+    @apply text-xl font-semibold;
+  }
+  .sFormCard {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+} 

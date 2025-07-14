@@ -4,9 +4,11 @@ import HeroSlider from "../components/HeroSlider";
 import HomeClient from "../components/HomeClient";
 import CategoriasDestacadas from "../components/CategoriasDestacadas";
 import LoMasVendido from "../components/LoMasVendido";
+import "./globals.css";
 
 export default function HomePage() {
   const { data: session } = useSession();
+
   return (
     <>
       {session?.user && (

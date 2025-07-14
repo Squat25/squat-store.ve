@@ -1,0 +1,6 @@
+/* Tailwind v4: Solo utilidades de layout muy básicas en @apply. */
+
+.test {
+  @apply flex items-center justify-center;
+}
+

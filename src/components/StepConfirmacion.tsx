@@ -1,8 +1,11 @@
+"use client";
+
 import React, { useEffect, useContext, useState } from "react";
 import { useCheckout } from "../context/CheckoutContext";
 import { CartContext } from "../context/CartContext";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useToast } from "./Toast";
 
 interface StepConfirmacionProps {
   onBack: () => void;
@@ -22,6 +25,7 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
   const { data: session } = useSession();
   const [cartSnapshot, setCartSnapshot] = useState([]); // Copia local del carrito
   const [cartTotalSnapshot, setCartTotalSnapshot] = useState(0);
+  const { success: toastSuccess, error: toastError } = useToast();
 
   useEffect(() => {
     localStorage.removeItem("checkout_datosEntrega");
@@ -31,6 +35,7 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
     if (loading) return; // Evita doble envío
     if (cart.length === 0) {
       setError("No puedes confirmar un pedido con el carrito vacío.");
+      toastError("No puedes confirmar un pedido con el carrito vacío.");
       return;
     }
     setLoading(true);
@@ -52,8 +57,10 @@ const StepConfirmacion: React.FC<StepConfirmacionProps> = ({
       if (!res.ok) throw new Error("No se pudo guardar el pedido");
       setSuccess(true);
       clearCart();
+      toastSuccess("¡Pedido enviado correctamente!");
     } catch (err) {
       setError(err.message || "Error al guardar el pedido");
+      toastError(err.message || "Error al guardar el pedido");
     } finally {
       setLoading(false);
     }

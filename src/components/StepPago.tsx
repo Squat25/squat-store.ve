@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import { uploadToImgBB } from "../utils/uploadToImgBB";

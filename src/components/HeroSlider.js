@@ -124,24 +124,6 @@ export default function HeroSlider() {
           />
         ))}
       </div>
-      {/* Animaciones fade-in */}
-      <style jsx>{`
-        .animate-fade-in {
-          opacity: 0;
-          animation: fadeIn 0.7s forwards;
-        }
-        .animate-fade-in.delay-100 {
-          animation-delay: 0.1s;
-        }
-        .animate-fade-in.delay-200 {
-          animation-delay: 0.2s;
-        }
-        @keyframes fadeIn {
-          to {
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 }

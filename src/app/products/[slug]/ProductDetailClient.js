@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
+import { useToast } from "../../../components/Toast";
 
 export default function ProductDetailClient({ product }) {
   const { addToCart } = useContext(CartContext);
+  const { success } = useToast();
 
   const handleAddToCart = () => {
     addToCart({
@@ -14,6 +16,7 @@ export default function ProductDetailClient({ product }) {
       price: product.price,
       image: product.images?.url || "",
     });
+    success("Producto añadido al carrito");
   };
 
   return (

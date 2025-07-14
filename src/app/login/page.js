@@ -4,6 +4,7 @@ import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import Link from "next/link";
 
 export default function LoginPage() {
   const { data: session } = useSession();
@@ -26,22 +27,23 @@ export default function LoginPage() {
     }
   }, [session, router]);
 
-  // Login manual conectado a API
+  // Login manual usando NextAuth
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
     setLoading(true);
     try {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      const res = await signIn("credentials", {
+        email: loginEmail,
+        password: loginPassword,
+        redirect: false,
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Error desconocido");
-      setSuccess("¡Login exitoso! (Simulado, no hay sesión persistente)");
+      if (res?.error) throw new Error(res.error);
+      setSuccess("¡Login exitoso!");
       setError("");
+      // Redirigir al home
+      router.replace("/");
     } catch (err) {
       setError(err.message);
       setSuccess("");
@@ -80,80 +82,66 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-2">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        {/* Tabs */}
-        <div className="flex mb-8 border-b">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md flex flex-col items-center">
+        <div className="w-full flex mb-6">
           <button
-            className={`flex-1 py-2 text-lg font-semibold transition-colors duration-200 border-b-2 ${
+            className={`flex-1 py-2 font-semibold border-b-2 transition-colors duration-200 ${
               tab === "login"
                 ? "border-black text-black"
                 : "border-transparent text-gray-400"
             }`}
-            onClick={() => {
-              setTab("login");
-              setError("");
-              setSuccess("");
-            }}
+            onClick={() => setTab("login")}
           >
             Iniciar sesión
           </button>
           <button
-            className={`flex-1 py-2 text-lg font-semibold transition-colors duration-200 border-b-2 ${
+            className={`flex-1 py-2 font-semibold border-b-2 transition-colors duration-200 ${
               tab === "register"
                 ? "border-black text-black"
                 : "border-transparent text-gray-400"
             }`}
-            onClick={() => {
-              setTab("register");
-              setError("");
-              setSuccess("");
-            }}
+            onClick={() => setTab("register")}
           >
             Registrarse
           </button>
         </div>
-
-        {/* Google Sign-In */}
-        <button
-          onClick={() => signIn("google", { callbackUrl: "/" })}
-          className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-md shadow transition-colors duration-200 mb-4"
-        >
-          <svg width="24" height="24" viewBox="0 0 48 48">
-            <g>
-              <path
-                fill="#4285F4"
-                d="M44.5 20H24v8.5h11.7C34.7 33.1 29.8 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c2.7 0 5.2.9 7.2 2.5l6.4-6.4C34.1 5.1 29.3 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.5 0 19.5-7.6 21-17.5.1-.7.1-1.3.1-2 0-1.3-.1-2.6-.3-3.8z"
-              />
-              <path
-                fill="#34A853"
-                d="M6.3 14.7l7 5.1C15.5 16.1 19.4 13 24 13c2.7 0 5.2.9 7.2 2.5l6.4-6.4C34.1 5.1 29.3 3 24 3c-7.2 0-13.4 3.1-17.7 8z"
-              />
-              <path
-                fill="#FBBC05"
-                d="M24 45c5.3 0 10.1-1.8 13.8-4.9l-6.4-5.2C29.2 36.7 26.7 37.5 24 37.5c-5.7 0-10.6-3.7-12.3-8.8l-7 5.4C7.1 41.1 14.9 45 24 45z"
-              />
-              <path
-                fill="#EA4335"
-                d="M44.5 20H24v8.5h11.7c-1.1 3.1-4.1 5.5-7.7 5.5-2.2 0-4.2-.7-5.7-2l-7 5.4C15.5 43.9 19.4 47 24 47c5.3 0 10.1-1.8 13.8-4.9l-6.4-5.2C29.2 36.7 26.7 37.5 24 37.5c-5.7 0-10.6-3.7-12.3-8.8l-7 5.4C7.1 41.1 14.9 45 24 45z"
-              />
-            </g>
-          </svg>
-          Continuar con Google
-        </button>
-
-        {/* Separador visual */}
-        <div className="flex items-center my-6">
-          <div className="flex-grow h-px bg-gray-300" />
-          <span className="mx-4 text-gray-400">o</span>
-          <div className="flex-grow h-px bg-gray-300" />
-        </div>
-
-        {/* Formulario de Login */}
         {tab === "login" && (
-          <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <form onSubmit={handleLogin} className="w-full flex flex-col gap-4">
+            <button
+              type="button"
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded transition-colors duration-200 mb-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width={24}
+                height={24}
+              >
+                <g>
+                  <path
+                    fill="#4285F4"
+                    d="M43.611 20.083H42V20H24v8h11.303C33.972 32.082 29.372 35 24 35c-6.065 0-11-4.935-11-11s4.935-11 11-11c2.507 0 4.81.857 6.646 2.278l6.435-6.435C33.047 6.534 28.761 5 24 5 12.954 5 4 13.954 4 25s8.954 20 20 20c11.046 0 20-8.954 20-20 0-1.341-.138-2.651-.389-3.917z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M6.306 14.691l6.571 4.819C14.655 16.163 19.001 13 24 13c2.507 0 4.81.857 6.646 2.278l6.435-6.435C33.047 6.534 28.761 5 24 5c-6.065 0-11 4.935-11 11 0 1.306.252 2.554.706 3.691z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M24 44c5.346 0 9.822-1.824 13.09-4.956l-6.047-4.946C29.372 35 24 35 24 35c-5.372 0-9.972-2.918-11.303-7.083l-6.571 4.819C8.978 41.466 16.954 44 24 44z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M43.611 20.083H42V20H24v8h11.303C33.972 32.082 29.372 35 24 35c-6.065 0-11-4.935-11-11s4.935-11 11-11c2.507 0 4.81.857 6.646 2.278l6.435-6.435C33.047 6.534 28.761 5 24 5 12.954 5 4 13.954 4 25s8.954 20 20 20c11.046 0 20-8.954 20-20 0-1.341-.138-2.651-.389-3.917z"
+                  />
+                </g>
+              </svg>
+              Continuar con Google
+            </button>
             <input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder="Email"
               className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
               value={loginEmail}
               onChange={(e) => setLoginEmail(e.target.value)}
@@ -163,27 +151,18 @@ export default function LoginPage() {
               <input
                 type={showLoginPassword ? "text" : "password"}
                 placeholder="Contraseña"
-                className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black w-full pr-12"
+                className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black w-full"
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 required
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                 onClick={() => setShowLoginPassword((v) => !v)}
                 tabIndex={-1}
-                aria-label={
-                  showLoginPassword
-                    ? "Ocultar contraseña"
-                    : "Mostrar contraseña"
-                }
               >
-                {showLoginPassword ? (
-                  <HiOutlineEyeOff className="w-6 h-6" />
-                ) : (
-                  <HiOutlineEye className="w-6 h-6" />
-                )}
+                {showLoginPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
               </button>
             </div>
             <button
@@ -191,21 +170,60 @@ export default function LoginPage() {
               className="w-full bg-black text-white p-3 rounded-md text-lg font-semibold hover:bg-gray-800 transition-colors duration-300"
               disabled={loading}
             >
-              {loading ? "Cargando..." : "Iniciar sesión"}
+              {loading ? "Iniciando..." : "Iniciar sesión"}
             </button>
-            {error && <p className="text-red-500 text-center mt-2">{error}</p>}
-            {success && (
-              <p className="text-green-600 text-center mt-2">{success}</p>
-            )}
+            <div className="flex justify-end mt-1">
+              <Link
+                href="/forgot-password"
+                className="text-sm text-blue-600 hover:underline hover:text-blue-800 transition-colors duration-200 font-medium"
+              >
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
+            {error && <div className="text-red-600 text-sm">{error}</div>}
+            {success && <div className="text-green-600 text-sm">{success}</div>}
           </form>
         )}
-
-        {/* Formulario de Registro */}
         {tab === "register" && (
-          <form onSubmit={handleRegister} className="flex flex-col gap-4">
+          <form
+            onSubmit={handleRegister}
+            className="w-full flex flex-col gap-4"
+          >
+            <button
+              type="button"
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              className="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded transition-colors duration-200 mb-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width={24}
+                height={24}
+              >
+                <g>
+                  <path
+                    fill="#4285F4"
+                    d="M43.611 20.083H42V20H24v8h11.303C33.972 32.082 29.372 35 24 35c-6.065 0-11-4.935-11-11s4.935-11 11-11c2.507 0 4.81.857 6.646 2.278l6.435-6.435C33.047 6.534 28.761 5 24 5 12.954 5 4 13.954 4 25s8.954 20 20 20c11.046 0 20-8.954 20-20 0-1.341-.138-2.651-.389-3.917z"
+                  />
+                  <path
+                    fill="#34A853"
+                    d="M6.306 14.691l6.571 4.819C14.655 16.163 19.001 13 24 13c2.507 0 4.81.857 6.646 2.278l6.435-6.435C33.047 6.534 28.761 5 24 5c-6.065 0-11 4.935-11 11 0 1.306.252 2.554.706 3.691z"
+                  />
+                  <path
+                    fill="#FBBC05"
+                    d="M24 44c5.346 0 9.822-1.824 13.09-4.956l-6.047-4.946C29.372 35 24 35 24 35c-5.372 0-9.972-2.918-11.303-7.083l-6.571 4.819C8.978 41.466 16.954 44 24 44z"
+                  />
+                  <path
+                    fill="#EA4335"
+                    d="M43.611 20.083H42V20H24v8h11.303C33.972 32.082 29.372 35 24 35c-6.065 0-11-4.935-11-11s4.935-11 11-11c2.507 0 4.81.857 6.646 2.278l6.435-6.435C33.047 6.534 28.761 5 24 5 12.954 5 4 13.954 4 25s8.954 20 20 20c11.046 0 20-8.954 20-20 0-1.341-.138-2.651-.389-3.917z"
+                  />
+                </g>
+              </svg>
+              Continuar con Google
+            </button>
             <input
               type="text"
-              placeholder="Nombre completo"
+              placeholder="Nombre"
               className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
               value={registerName}
               onChange={(e) => setRegisterName(e.target.value)}
@@ -213,7 +231,7 @@ export default function LoginPage() {
             />
             <input
               type="email"
-              placeholder="Correo electrónico"
+              placeholder="Email"
               className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
               value={registerEmail}
               onChange={(e) => setRegisterEmail(e.target.value)}
@@ -223,27 +241,19 @@ export default function LoginPage() {
               <input
                 type={showRegisterPassword ? "text" : "password"}
                 placeholder="Contraseña"
-                className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black w-full pr-12"
+                className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black w-full"
                 value={registerPassword}
                 onChange={(e) => setRegisterPassword(e.target.value)}
                 required
+                minLength={6}
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
                 onClick={() => setShowRegisterPassword((v) => !v)}
                 tabIndex={-1}
-                aria-label={
-                  showRegisterPassword
-                    ? "Ocultar contraseña"
-                    : "Mostrar contraseña"
-                }
               >
-                {showRegisterPassword ? (
-                  <HiOutlineEyeOff className="w-6 h-6" />
-                ) : (
-                  <HiOutlineEye className="w-6 h-6" />
-                )}
+                {showRegisterPassword ? <HiOutlineEyeOff /> : <HiOutlineEye />}
               </button>
             </div>
             <button
@@ -251,12 +261,10 @@ export default function LoginPage() {
               className="w-full bg-black text-white p-3 rounded-md text-lg font-semibold hover:bg-gray-800 transition-colors duration-300"
               disabled={loading}
             >
-              {loading ? "Cargando..." : "Registrarse"}
+              {loading ? "Registrando..." : "Registrarse"}
             </button>
-            {error && <p className="text-red-500 text-center mt-2">{error}</p>}
-            {success && (
-              <p className="text-green-600 text-center mt-2">{success}</p>
-            )}
+            {error && <div className="text-red-600 text-sm">{error}</div>}
+            {success && <div className="text-green-600 text-sm">{success}</div>}
           </form>
         )}
       </div>

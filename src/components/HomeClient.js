@@ -6,6 +6,7 @@ import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { request } from "../lib/datocms";
 import { getBestSellers } from "../lib/datocms";
+import { useToast } from "./Toast";
 
 const HOMEPAGE_QUERY = `
   query AllProducts {
@@ -28,6 +29,7 @@ const HOMEPAGE_QUERY = `
 export default function HomeClient() {
   const { data: session } = useSession();
   const { addToCart } = useContext(CartContext);
+  const { success, warning } = useToast();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -129,6 +131,7 @@ export default function HomeClient() {
                       error: "Selecciona talla y color",
                     },
                   }));
+                  warning("Debes seleccionar talla y color");
                   return;
                 }
                 setSelection((prev) => ({
@@ -144,6 +147,7 @@ export default function HomeClient() {
                   size: selectedSize,
                   color: selectedColor,
                 });
+                success("Producto añadido al carrito");
               };
               return (
                 <div
@@ -172,13 +176,13 @@ export default function HomeClient() {
                     ${product.price.toFixed(2)}
                   </p>
                   {/* Selector de tallas */}
-                  <div className="flex gap-2 mb-4">
+                  <div className="flex gap-2 mb-4 w-full justify-center">
                     {sizes.map((size) => (
                       <button
                         key={size}
-                        className={`px-3 py-1 rounded border ${
+                        className={`px-3 py-1 rounded border text-sm font-semibold transition-colors duration-200 ${
                           selectedSize === size
-                            ? "bg-black text-white"
+                            ? "bg-black text-white border-black"
                             : "bg-white text-black border-gray-300"
                         }`}
                         onClick={() =>
@@ -192,6 +196,7 @@ export default function HomeClient() {
                           }))
                         }
                         type="button"
+                        aria-label={size}
                       >
                         {size}
                       </button>

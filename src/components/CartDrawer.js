@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 import Image from "next/image";
@@ -116,10 +117,17 @@ export default function CartDrawer() {
           </div>
           <Link
             href="/checkout"
-            className="block w-full text-center bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition-colors duration-200"
+            className="block w-full text-center bg-black text-white py-3 rounded font-semibold hover:bg-gray-800 transition-colors duration-200 mb-2"
             onClick={() => setDrawerOpen(false)}
           >
             Ir a Checkout
+          </Link>
+          <Link
+            href="/cart"
+            className="block w-full text-center bg-gray-200 text-black py-3 rounded font-semibold hover:bg-gray-300 transition-colors duration-200"
+            onClick={() => setDrawerOpen(false)}
+          >
+            Ver carrito
           </Link>
         </div>
       </aside>
