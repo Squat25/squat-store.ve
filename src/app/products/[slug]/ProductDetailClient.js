@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useContext } from "react";
 import { CartContext } from "../../../context/CartContext";
 import { useToast } from "../../../components/Toast";
@@ -8,6 +8,7 @@ import ProductosRelacionados from "../../../components/ProductosRelacionados";
 import NewsletterSquat from "../../../components/NewsletterSquat";
 import Breadcrumb from "../../../components/Breadcrumb";
 import Container from "../../../components/Container";
+import Link from "next/link";
 
 // Simulación de colores, tallas y reviews
 const COLORS = [
@@ -54,13 +55,32 @@ function StarRating({ rating, className = "" }) {
 }
 
 export default function ProductDetailClient({ product }) {
-  const { addToCart } = useContext(CartContext);
-  const { success } = useToast();
+  const { addToCart, isInCart, getCartItemQuantity } = useContext(CartContext);
+  const { success, error } = useToast();
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedSize, setSelectedSize] = useState(2); // Large por defecto
   const [quantity, setQuantity] = useState(1);
   const [tab, setTab] = useState("reviews");
+
+  // Verificar si el producto ya está en el carrito
+  const isProductInCart = isInCart(
+    product.id,
+    SIZES[selectedSize],
+    COLORS[selectedColor].name
+  );
+  const cartQuantity = getCartItemQuantity(
+    product.id,
+    SIZES[selectedSize],
+    COLORS[selectedColor].name
+  );
+
+  // Actualizar cantidad cuando cambie la selección del carrito
+  useEffect(() => {
+    if (isProductInCart && cartQuantity > 0) {
+      setQuantity(cartQuantity);
+    }
+  }, [isProductInCart, cartQuantity]);
 
   // Simulación de descuento
   const originalPrice = product.price * 1.5;
@@ -100,16 +120,32 @@ export default function ProductDetailClient({ product }) {
   ];
 
   const handleAddToCart = () => {
-    addToCart({
+    if (
+      !product.id ||
+      !SIZES[selectedSize] ||
+      !COLORS[selectedColor] ||
+      !product.name ||
+      !product.price
+    ) {
+      error("Faltan datos del producto. No se puede añadir al carrito.");
+      return;
+    }
+
+    const success = addToCart({
       id: product.id,
       name: product.name,
       price: product.price,
       image: images[selectedImage]?.url || "",
       color: COLORS[selectedColor].name,
       size: SIZES[selectedSize],
-      quantity,
+      quantity: quantity, // Usar la cantidad seleccionada
     });
-    success("Producto añadido al carrito");
+
+    if (success) {
+      success("Producto añadido al carrito");
+    } else {
+      error("Error al agregar el producto al carrito");
+    }
   };
 
   return (
@@ -254,7 +290,7 @@ export default function ProductDetailClient({ product }) {
                   className={`w-9 h-9 md:w-10 md:h-10 rounded-full border-2 flex items-center justify-center focus:outline-none transition-all duration-150 shadow-sm ${
                     selectedColor === idx
                       ? "border-black ring-2 ring-black scale-110"
-                      : "border-gray-200"
+                      : "border-gray-200 hover:border-gray-400"
                   }`}
                   style={{ backgroundColor: color.code }}
                   onClick={() => setSelectedColor(idx)}
@@ -312,7 +348,7 @@ export default function ProductDetailClient({ product }) {
               className="flex-1 bg-black text-white px-6 py-3 rounded-full text-lg font-bold hover:bg-gray-800 transition-colors duration-200 shadow-md"
               onClick={handleAddToCart}
             >
-              Add to Cart
+              Añadir al carrito
             </button>
           </div>
         </div>

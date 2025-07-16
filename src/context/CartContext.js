@@ -38,7 +38,17 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product) => {
     if (!product.id || !product.size || !product.color) {
       console.error("Producto incompleto:", product);
-      return;
+      return false;
+    }
+
+    // Validar que el producto tenga los datos mínimos necesarios
+    if (
+      !product.name ||
+      typeof product.price !== "number" ||
+      product.price <= 0
+    ) {
+      console.error("Producto con datos inválidos:", product);
+      return false;
     }
 
     setCart((prevCart) => {
@@ -50,9 +60,12 @@ export const CartProvider = ({ children }) => {
       if (existingIndex >= 0) {
         // Actualizar cantidad si ya existe
         const updatedCart = [...prevCart];
+        const currentQuantity = updatedCart[existingIndex].quantity;
+        const newQuantity = currentQuantity + (product.quantity || 1);
+
         updatedCart[existingIndex] = {
           ...updatedCart[existingIndex],
-          quantity: updatedCart[existingIndex].quantity + 1,
+          quantity: newQuantity,
         };
         return updatedCart;
       } else {
@@ -63,15 +76,16 @@ export const CartProvider = ({ children }) => {
             id: product.id,
             name: product.name,
             price: product.price,
-            image: product.image,
+            image: product.image || "",
             size: product.size,
             color: product.color,
-            quantity: 1,
+            quantity: product.quantity || 1,
           },
         ];
       }
     });
     setDrawerOpen(true);
+    return true;
   };
 
   // Eliminar producto del carrito
@@ -114,6 +128,19 @@ export const CartProvider = ({ children }) => {
     [cart]
   );
 
+  // Verificar si un producto ya está en el carrito
+  const isInCart = (productId, size, color) => {
+    const variantId = `${productId}-${size}-${color}`;
+    return cart.some((item) => getVariantId(item) === variantId);
+  };
+
+  // Obtener cantidad de un producto en el carrito
+  const getCartItemQuantity = (productId, size, color) => {
+    const variantId = `${productId}-${size}-${color}`;
+    const item = cart.find((item) => getVariantId(item) === variantId);
+    return item ? item.quantity : 0;
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -126,6 +153,8 @@ export const CartProvider = ({ children }) => {
         cartItemsCount,
         drawerOpen,
         setDrawerOpen,
+        isInCart,
+        getCartItemQuantity,
       }}
     >
       {children}

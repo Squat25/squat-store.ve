@@ -46,6 +46,7 @@ const Header = () => {
   const isLoading = status === "loading";
   const [menuOpen, setMenuOpen] = useState(false);
   const { setDrawerOpen, cart } = useContext(CartContext);
+  const cartItemsCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleLogout = () => {
     signOut();
@@ -94,9 +95,9 @@ const Header = () => {
             aria-label="Abrir carrito"
           >
             <HiOutlineShoppingBag className="w-6 h-6" />
-            {cart.length > 0 && (
+            {cartItemsCount > 0 && (
               <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 font-bold">
-                {cart.length}
+                {cartItemsCount}
               </span>
             )}
           </button>

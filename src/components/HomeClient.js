@@ -28,7 +28,7 @@ const HOMEPAGE_QUERY = `
 
 export default function HomeClient() {
   const { data: session } = useSession();
-  const { addToCart } = useContext(CartContext);
+  const { addToCart, isInCart, getCartItemQuantity } = useContext(CartContext);
   const { success, warning } = useToast();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -100,9 +100,6 @@ export default function HomeClient() {
 
   return (
     <>
-      {/* Hero Section */}
-      {/* Eliminado: Hero antiguo con imagen y mensaje de bienvenida */}
-
       {/* Productos Destacados */}
       <section className="py-8 px-4">
         <h2 className="text-3xl font-bold text-center mb-8">
@@ -122,8 +119,19 @@ export default function HomeClient() {
               const selectedSize = selection[product.id]?.size || "";
               const selectedColor = selection[product.id]?.color || "";
               const error = selection[product.id]?.error || "";
+
+              // Verificar si el producto ya está en el carrito
+              const isProductInCart =
+                selectedSize && selectedColor
+                  ? isInCart(product.id, selectedSize, selectedColor)
+                  : false;
+              const cartQuantity =
+                selectedSize && selectedColor
+                  ? getCartItemQuantity(product.id, selectedSize, selectedColor)
+                  : 0;
+
               const handleAdd = (e) => {
-                e.stopPropagation(); // Evita que el click en el botón navegue
+                e.stopPropagation();
                 if (!selectedSize || !selectedColor) {
                   setSelection((prev) => ({
                     ...prev,
@@ -142,39 +150,50 @@ export default function HomeClient() {
                     error: "",
                   },
                 }));
-                addToCart({
+
+                const success = addToCart({
                   ...product,
                   image: product.images?.url || "",
                   size: selectedSize,
                   color: selectedColor,
+                  quantity: 1, // Siempre agregar 1 en la página principal
                 });
-                success("Producto añadido al carrito");
+
+                if (success) {
+                  success("Producto añadido al carrito");
+                } else {
+                  warning("Error al agregar el producto al carrito");
+                }
               };
               return (
-                <Link
+                <div
                   key={product.id}
-                  href={`/products/${product.slug}`}
                   className="bg-white p-4 rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center group cursor-pointer focus:outline-none"
                   tabIndex={0}
                 >
-                  {product.images && product.images.url ? (
-                    <Image
-                      src={product.images.url}
-                      alt={product.images.alt || product.name}
-                      width={product.images.width || 300}
-                      height={product.images.height || 300}
-                      className="w-full h-auto rounded-md mb-4 object-cover transition-transform duration-300 group-hover:scale-105"
-                      style={{ objectFit: "cover" }}
-                      priority
-                    />
-                  ) : (
-                    <div className="w-full h-[300px] bg-gray-200 rounded-md flex items-center justify-center text-gray-500 text-2xl mb-4">
-                      No Image Available
-                    </div>
-                  )}
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                    {product.name}
-                  </h3>
+                  <Link
+                    href={`/products/${product.slug}`}
+                    className="w-full flex flex-col items-center"
+                  >
+                    {product.images && product.images.url ? (
+                      <Image
+                        src={product.images.url}
+                        alt={product.images.alt || product.name}
+                        width={product.images.width || 300}
+                        height={product.images.height || 300}
+                        className="w-full h-auto rounded-md mb-4 object-cover transition-transform duration-300 group-hover:scale-105"
+                        style={{ objectFit: "cover" }}
+                        priority
+                      />
+                    ) : (
+                      <div className="w-full h-[300px] bg-gray-200 rounded-md flex items-center justify-center text-gray-500 text-2xl mb-4">
+                        No Image Available
+                      </div>
+                    )}
+                    <h3 className="text-lg font-semibold text-gray-800 mb-2 hover:underline">
+                      {product.name}
+                    </h3>
+                  </Link>
                   <p className="text-gray-600 text-lg font-bold mb-2">
                     ${product.price.toFixed(2)}
                   </p>
@@ -189,7 +208,7 @@ export default function HomeClient() {
                         className={`px-3 py-1 rounded border text-sm font-semibold transition-colors duration-200 ${
                           selectedSize === size
                             ? "bg-black text-white border-black"
-                            : "bg-white text-black border-gray-300"
+                            : "bg-white text-black border-gray-300 hover:border-black"
                         }`}
                         onClick={() =>
                           setSelection((prev) => ({
@@ -216,10 +235,10 @@ export default function HomeClient() {
                     {colors.map((color) => (
                       <button
                         key={color.name}
-                        className={`w-6 h-6 rounded-full border-2 ${
+                        className={`w-6 h-6 rounded-full border-2 transition-all duration-200 ${
                           selectedColor === color.value
                             ? "border-black scale-110"
-                            : "border-gray-300"
+                            : "border-gray-300 hover:border-gray-500"
                         }`}
                         style={{ background: color.value }}
                         onClick={() =>
@@ -237,6 +256,7 @@ export default function HomeClient() {
                       />
                     ))}
                   </div>
+                  {/* Mensaje de error sutil */}
                   {error && (
                     <div className="text-red-500 text-xs mb-2">{error}</div>
                   )}
@@ -247,7 +267,7 @@ export default function HomeClient() {
                   >
                     Añadir al carrito
                   </button>
-                </Link>
+                </div>
               );
             })
           ) : (
