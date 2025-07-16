@@ -122,7 +122,8 @@ export default function HomeClient() {
               const selectedSize = selection[product.id]?.size || "";
               const selectedColor = selection[product.id]?.color || "";
               const error = selection[product.id]?.error || "";
-              const handleAdd = () => {
+              const handleAdd = (e) => {
+                e.stopPropagation(); // Evita que el click en el botón navegue
                 if (!selectedSize || !selectedColor) {
                   setSelection((prev) => ({
                     ...prev,
@@ -150,9 +151,11 @@ export default function HomeClient() {
                 success("Producto añadido al carrito");
               };
               return (
-                <div
+                <Link
                   key={product.id}
-                  className="bg-white p-4 rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center group"
+                  href={`/products/${product.slug}`}
+                  className="bg-white p-4 rounded-lg shadow-md hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center text-center group cursor-pointer focus:outline-none"
+                  tabIndex={0}
                 >
                   {product.images && product.images.url ? (
                     <Image
@@ -176,7 +179,10 @@ export default function HomeClient() {
                     ${product.price.toFixed(2)}
                   </p>
                   {/* Selector de tallas */}
-                  <div className="flex gap-2 mb-4 w-full justify-center">
+                  <div
+                    className="flex gap-2 mb-4 w-full justify-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {sizes.map((size) => (
                       <button
                         key={size}
@@ -203,7 +209,10 @@ export default function HomeClient() {
                     ))}
                   </div>
                   {/* Selector de colores */}
-                  <div className="flex gap-2 mb-4">
+                  <div
+                    className="flex gap-2 mb-4"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     {colors.map((color) => (
                       <button
                         key={color.name}
@@ -238,7 +247,7 @@ export default function HomeClient() {
                   >
                     Añadir al carrito
                   </button>
-                </div>
+                </Link>
               );
             })
           ) : (

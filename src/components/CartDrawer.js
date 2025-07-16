@@ -82,7 +82,12 @@ export default function CartDrawer() {
                       <button
                         className="px-2 py-1 bg-gray-200 rounded"
                         onClick={() =>
-                          updateQuantity(item.id, item.quantity - 1)
+                          updateQuantity(
+                            item.id,
+                            item.size,
+                            item.color,
+                            item.quantity - 1
+                          )
                         }
                         disabled={item.quantity <= 1}
                       >
@@ -92,14 +97,21 @@ export default function CartDrawer() {
                       <button
                         className="px-2 py-1 bg-gray-200 rounded"
                         onClick={() =>
-                          updateQuantity(item.id, item.quantity + 1)
+                          updateQuantity(
+                            item.id,
+                            item.size,
+                            item.color,
+                            item.quantity + 1
+                          )
                         }
                       >
                         +
                       </button>
                       <button
                         className="ml-4 text-red-500 hover:underline text-xs"
-                        onClick={() => removeFromCart(item.id)}
+                        onClick={() =>
+                          removeFromCart(item.id, item.size, item.color)
+                        }
                       >
                         Eliminar
                       </button>

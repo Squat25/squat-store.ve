@@ -54,7 +54,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md w-full">
-      <div className="max-w-7xl mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-8">
+      <div className="max-w-7xl md:max-w-[744px] lg:max-w-7xl mx-auto flex items-center justify-between py-2 px-2 md:py-4 md:px-8">
         {/* Logo */}
         <div className="flex items-center flex-shrink-0">
           <Link href="/">
@@ -69,8 +69,8 @@ const Header = () => {
           </Link>
         </div>
 
-        {/* Categorías - Desktop */}
-        <nav className="hidden md:flex flex-1 justify-center space-x-6">
+        {/* Categorías - Desktop y Tablet */}
+        <nav className="hidden lg:flex flex-1 justify-center space-x-6">
           {categories.map((cat) => (
             <Link
               key={cat.name}
@@ -84,7 +84,7 @@ const Header = () => {
         </nav>
 
         {/* Acciones */}
-        <div className="flex items-center space-x-2 md:space-x-4">
+        <div className="flex items-center space-x-2 lg:space-x-4">
           <Link href="/search" className="text-gray-700 hover:text-black p-2">
             <HiOutlineSearch className="w-6 h-6" />
           </Link>
@@ -101,11 +101,11 @@ const Header = () => {
             )}
           </button>
           <CartDrawer />
-          {/* Ícono usuario solo en mobile, sin texto */}
+          {/* Ícono usuario en mobile y tablet, sin texto */}
           {!isLoading && (
             <Link
               href={session?.user ? "/profile" : "/login"}
-              className="block md:hidden text-gray-700 hover:text-black p-2"
+              className="block lg:hidden text-gray-700 hover:text-black p-2"
               aria-label={session?.user ? "Perfil" : "Iniciar Sesión"}
             >
               <HiOutlineUser className="w-6 h-6" />
@@ -114,7 +114,7 @@ const Header = () => {
           {/* Acceso usuario solo en desktop */}
           {!isLoading &&
             (session?.user ? (
-              <div className="hidden md:flex items-center space-x-2">
+              <div className="hidden lg:flex items-center space-x-2">
                 <Link
                   href="/profile"
                   className="flex items-center gap-1 text-black text-sm md:text-base font-medium hover:underline"
@@ -132,15 +132,15 @@ const Header = () => {
             ) : (
               <Link
                 href="/login"
-                className="hidden md:flex items-center gap-1 text-black hover:text-gray-500 transition-colors duration-200 text-sm md:text-base"
+                className="hidden lg:flex items-center gap-1 text-black hover:text-gray-500 transition-colors duration-200 text-sm lg:text-base"
               >
                 <HiOutlineUser className="w-6 h-6" />
                 Iniciar Sesión
               </Link>
             ))}
-          {/* Menú hamburguesa - solo móvil */}
+          {/* Menú hamburguesa - móvil y tablet */}
           <button
-            className="md:hidden text-gray-700 hover:text-black p-2 focus:outline-none"
+            className="lg:hidden text-gray-700 hover:text-black p-2 focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Abrir menú"
           >
@@ -153,10 +153,10 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Menú lateral móvil */}
+      {/* Menú lateral móvil y tablet */}
       {menuOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black bg-opacity-40 md:hidden"
+          className="fixed inset-0 z-50 bg-black bg-opacity-40 lg:hidden"
           onClick={() => setMenuOpen(false)}
         >
           <nav

@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { CartProvider } from "../context/CartContext";
 import SessionProviderClient from "../components/SessionProviderClient";
 import ToastProvider from "../components/Toast";
+import { Inter, Montserrat } from "next/font/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,13 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["700", "900"],
+  variable: "--font-montserrat",
 });
 
 export const metadata = {
@@ -88,7 +96,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="es" className={`${inter.variable} ${montserrat.variable}`}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/LogoNegro.png" />

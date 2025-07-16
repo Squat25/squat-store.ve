@@ -7,6 +7,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        mobile: "375px",
+        md: "744px",
+        lg: "1440px",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "sans-serif"],
+        display: ["var(--font-montserrat)", "sans-serif"],
+      },
       keyframes: {
         "fade-in": {
           "0%": { opacity: "0" },

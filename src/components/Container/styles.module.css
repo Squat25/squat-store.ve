@@ -1,0 +1,21 @@
+.backgroundImage,
+.mobileBackgroundImage {
+  @apply !aspect-auto !h-full !w-full !max-w-none object-cover;
+}
+
+.backgroundImage,
+.mobileBackgroundImage img {
+  @apply !aspect-auto !h-full !w-full !max-w-none object-cover;
+}
+
+.backgroundWrapper {
+  @apply absolute left-0 top-0 h-full w-full;
+}
+
+.desktop {
+  @apply hidden md:block;
+}
+
+.mobileBackgroundImage {
+  @apply block md:hidden;
+} 

@@ -38,7 +38,7 @@ export async function generateStaticParams() {
 export const revalidate = 259200; // 3 días
 
 export default async function ProductPage({ params }) {
-  const { slug } = params;
+  const { slug } = await params;
   const { product } = await request({
     query: PRODUCT_BY_SLUG_QUERY,
     variables: { slug },
